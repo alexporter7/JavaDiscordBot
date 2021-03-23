@@ -5,6 +5,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+/**
+ * @author Alex Porter
+ */
 public class WeatherDataParser {
 
     private final JSONObject json;
