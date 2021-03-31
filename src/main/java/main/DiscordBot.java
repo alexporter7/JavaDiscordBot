@@ -4,18 +4,23 @@ import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.examples.command.AboutCommand;
 import commands.GetWeatherCommand;
+import commands.ListCommand;
 import commands.OptionCommand;
 import exception.DiscordTokenFail;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
-import objects.BotOption;
+import objects.lists.BotList;
+import objects.lists.BotListHandler;
+import objects.lists.BotListObject;
+import objects.options.BotOption;
 import util.Config;
 import util.DiscordToken;
-import util.OptionHandler;
+import objects.options.OptionHandler;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Alex Porter
@@ -24,12 +29,14 @@ public class DiscordBot {
 
     public static JDA jda = null;
     public static OptionHandler optionHandler = new OptionHandler();
+    public static BotListHandler botListHandler = new BotListHandler();
 
     public static void main(String[] args) {
         //Attempt to build the JDA Object, if it fails throw an exception
         try {
             buildJda();
             initializeOptions();
+            initializeLists();
         } catch (DiscordTokenFail discordTokenFail) {
             discordTokenFail.printStackTrace();
         }
@@ -54,7 +61,9 @@ public class DiscordBot {
                 //Weather Command
                 new GetWeatherCommand(eventWaiter),
                 //Option Command
-                new OptionCommand(eventWaiter)
+                new OptionCommand(eventWaiter),
+                //List Command
+                new ListCommand(eventWaiter)
         );
 
         try {
@@ -82,6 +91,19 @@ public class DiscordBot {
     private static void initializeOptions() {
         optionHandler.addOption(new BotOption<String>("test option 1", "string option", "value1"));
         optionHandler.addOption(new BotOption<Boolean>("test option 2", "boolean option", false));
+    }
+
+    /**
+     * Checks for serialized lists and loads them if necessary
+     */
+    private static void initializeLists() {
+        ArrayList<BotListObject> objects = new ArrayList<>();
+        for(int i = 0; i < 10; i++) {
+            objects.add(new BotListObject("test item " + i, "test description " + i));
+        }
+        BotList botList = new BotList("list 1", objects);
+        botListHandler.addList(botList);
+        botListHandler.serializeList();
     }
 
 }

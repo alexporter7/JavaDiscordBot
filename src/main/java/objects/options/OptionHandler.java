@@ -1,6 +1,6 @@
-package util;
+package objects.options;
 
-import objects.BotOption;
+import objects.options.BotOption;
 
 import java.util.ArrayList;
 

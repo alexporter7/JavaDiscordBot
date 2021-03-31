@@ -4,7 +4,7 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import main.DiscordBot;
-import objects.BotOption;
+import objects.options.BotOption;
 
 /**
  * @author Alex Porter

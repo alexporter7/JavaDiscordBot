@@ -1,4 +1,4 @@
-package objects;
+package objects.options;
 
 /**
  * @author Alex Porter
