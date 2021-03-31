@@ -38,6 +38,10 @@ public class OptionCommand extends Command {
                             .append("\n");
                 }
                 stringBuilder.append("```");
+                break;
+            default:
+                commandEvent.reply("Incorrect syntax. $option [mode]");
+                return;
         }
         commandEvent.reply(stringBuilder.toString());
     }

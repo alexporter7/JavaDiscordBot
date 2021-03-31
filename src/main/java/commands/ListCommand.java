@@ -4,6 +4,9 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
+/**
+ * Manages lists within the discord bot
+ */
 public class ListCommand extends Command {
 
     private final EventWaiter eventWaiter;
