@@ -55,7 +55,7 @@ public class BotCallHandler {
         return this.init;
     }
 
-    public void setInit() {
+    public void init() {
         this.init = true;
     }
 

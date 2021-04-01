@@ -39,6 +39,10 @@ public class DiscordBot {
     public static BotListHandler botListHandler = new BotListHandler();
     public static BotCallHandler botCallHandler = new BotCallHandler();
 
+    public static final String OPTION_HANDLER_JSON = "options.json";
+    public static final String LIST_HANDLER_JSON = "lists.json";
+
+
     public static void main(String[] args) {
         //Attempt to build the JDA Object, if it fails throw an exception
         try {
@@ -98,20 +102,21 @@ public class DiscordBot {
      * Initializes all the options that will be added into the bot
      */
     private static void initializeOptions() {
-        optionHandler.addOption(new BotOption<String>("test option 1", "string option", "value1"));
-        optionHandler.addOption(new BotOption<Boolean>("test option 2", "boolean option", false));
+        if(!optionHandler.hasInit()) {
+            optionHandler.deserializeOptions();
+            optionHandler.init();
+        }
+        optionHandler.serializeOptions();
     }
 
     /**
      * Checks for serialized lists and loads them if necessary
      */
     private static void initializeLists() {
-        ArrayList<BotListObject> objects = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            objects.add(new BotListObject("test item " + i, "test description " + i));
+        if(!botListHandler.hasInit()) {
+            botListHandler.deserializeList();
+            botListHandler.init();
         }
-        BotList botList = new BotList("list 1", objects);
-        botListHandler.addList(botList);
         botListHandler.serializeList();
     }
 
@@ -121,15 +126,9 @@ public class DiscordBot {
     private static void initializeCallHandler() {
         if(!botCallHandler.hasInit()) {
             botCallHandler.deserializeData();
+            botCallHandler.init();
         }
-
-        //TESTING DATA
-        for(int i = 0; i < 5; i++) {
-            botCallHandler.addCall(new BotCallObject("test call " + i));
-        }
-
         botCallHandler.serializeData();
-        System.out.println(Arrays.toString(botCallHandler.getCalls().toArray()));
     }
 
 }

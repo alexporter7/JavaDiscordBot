@@ -1,16 +1,22 @@
 package objects.options;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Alex Porter
- * @param <T> - Type for the value the option will hold
  */
-public class BotOption<T> {
+public class BotOption {
 
+    @SerializedName("name")
     private String name;
-    private String description;
-    private T value;
 
-    public BotOption(String name, String description, T value) {
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("value")
+    private String value;
+
+    public BotOption(String name, String description, String value) {
         this.name = name;
         this.description = description;
         this.value = value;
@@ -32,11 +38,11 @@ public class BotOption<T> {
         this.description = description;
     }
 
-    public T getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }

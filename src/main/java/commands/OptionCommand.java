@@ -22,6 +22,7 @@ public class OptionCommand extends Command {
 
     @Override
     protected void execute(CommandEvent commandEvent) {
+        DiscordBot.optionHandler.deserializeOptions();
         String[] command = commandEvent.getArgs().split(" ");
         StringBuilder stringBuilder = new StringBuilder();
         switch(command[0]) {
@@ -29,12 +30,11 @@ public class OptionCommand extends Command {
                 stringBuilder
                         .append("Options\n")
                         .append("```");
-                for(BotOption<?> botOption : DiscordBot.optionHandler.getOptions()) {
+                for(BotOption botOption : DiscordBot.optionHandler.getOptions()) {
                     stringBuilder
                             .append(botOption.getName())
                             .append(" : ")
-                            .append(botOption.getValue() instanceof Boolean ?
-                                    String.valueOf(botOption.getValue()) : botOption.getValue())
+                            .append(botOption.getValue())
                             .append("\n");
                 }
                 stringBuilder.append("```");
