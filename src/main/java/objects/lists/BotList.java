@@ -1,10 +1,15 @@
 package objects.lists;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class BotList {
 
+    @SerializedName("listName")
     private String listName;
+
+    @SerializedName("items")
     private ArrayList<BotListObject> items;
 
     public BotList() {

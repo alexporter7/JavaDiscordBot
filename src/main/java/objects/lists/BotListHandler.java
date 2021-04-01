@@ -1,6 +1,7 @@
 package objects.lists;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -25,9 +26,12 @@ public class BotListHandler {
     }
 
     public void serializeList() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {
-            gson.toJson(this.lists.get(0), new FileWriter("test.json"));
+            FileWriter fileWriter = new FileWriter("test.json");
+            gson.toJson(this.lists, fileWriter);
+            fileWriter.flush();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

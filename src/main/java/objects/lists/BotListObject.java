@@ -1,8 +1,12 @@
 package objects.lists;
 
+import com.google.gson.annotations.SerializedName;
+
 public class BotListObject {
 
+    @SerializedName("itemName")
     private String itemName;
+    @SerializedName("description")
     private String description;
 
     public BotListObject(String itemName) {
