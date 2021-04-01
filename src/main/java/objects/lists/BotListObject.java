@@ -6,6 +6,7 @@ public class BotListObject {
 
     @SerializedName("itemName")
     private String itemName;
+
     @SerializedName("description")
     private String description;
 
