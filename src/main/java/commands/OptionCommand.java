@@ -29,7 +29,7 @@ public class OptionCommand extends Command {
                 stringBuilder
                         .append("Options\n")
                         .append("```");
-                for(BotOption botOption : DiscordBot.optionHandler.getOptions()) {
+                for(BotOption<?> botOption : DiscordBot.optionHandler.getOptions()) {
                     stringBuilder
                             .append(botOption.getName())
                             .append(" : ")

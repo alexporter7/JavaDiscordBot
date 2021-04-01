@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import objects.calls.BotCallHandler;
+import objects.calls.BotCallObject;
 import objects.lists.BotList;
 import objects.lists.BotListHandler;
 import objects.lists.BotListObject;
@@ -21,15 +23,21 @@ import objects.options.OptionHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Alex Porter
+ * JavaDiscordBot is a bot being built to test functionality and attempt to program a bot in Java versus Python.
+ * To be able to use it a Config.java file must be placed in the "util" package with the Discord Token along with
+ * any other static and final variables referenced throughout the script.
  */
 public class DiscordBot {
 
     public static JDA jda = null;
+
     public static OptionHandler optionHandler = new OptionHandler();
     public static BotListHandler botListHandler = new BotListHandler();
+    public static BotCallHandler botCallHandler = new BotCallHandler();
 
     public static void main(String[] args) {
         //Attempt to build the JDA Object, if it fails throw an exception
@@ -37,6 +45,7 @@ public class DiscordBot {
             buildJda();
             initializeOptions();
             initializeLists();
+            initializeCallHandler();
         } catch (DiscordTokenFail discordTokenFail) {
             discordTokenFail.printStackTrace();
         }
@@ -104,6 +113,23 @@ public class DiscordBot {
         BotList botList = new BotList("list 1", objects);
         botListHandler.addList(botList);
         botListHandler.serializeList();
+    }
+
+    /**
+     * Checks for serialized call logs
+     */
+    private static void initializeCallHandler() {
+        if(!botCallHandler.hasInit()) {
+            botCallHandler.deserializeData();
+        }
+
+        //TESTING DATA
+        for(int i = 0; i < 5; i++) {
+            botCallHandler.addCall(new BotCallObject("test call " + i));
+        }
+
+        botCallHandler.serializeData();
+        System.out.println(Arrays.toString(botCallHandler.getCalls().toArray()));
     }
 
 }
