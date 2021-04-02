@@ -5,6 +5,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.examples.command.AboutCommand;
 import commands.GetWeatherCommand;
 import commands.ListCommand;
+import commands.LogCallCommand;
 import commands.OptionCommand;
 import exception.DiscordTokenFail;
 import net.dv8tion.jda.api.JDA;
@@ -76,7 +77,9 @@ public class DiscordBot {
                 //Option Command
                 new OptionCommand(eventWaiter),
                 //List Command
-                new ListCommand(eventWaiter)
+                new ListCommand(eventWaiter),
+                //Call Command
+                new LogCallCommand(eventWaiter)
         );
 
         try {
