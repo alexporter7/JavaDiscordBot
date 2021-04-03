@@ -16,6 +16,7 @@ import objects.calls.BotCallHandler;
 import objects.lists.BotListHandler;
 import objects.options.BotOption;
 import objects.options.OptionHandler;
+import util.BotObjectHandler;
 import util.Config;
 import util.DiscordToken;
 
@@ -41,6 +42,8 @@ public class DiscordBot {
 
     public static final String OPTION_HANDLER_JSON = "options.json";
     public static final String LIST_HANDLER_JSON = "lists.json";
+
+    //public static BotObjectHandler<BotOption> optionHandler = new BotObjectHandler(OPTION_HANDLER_JSON);
 
     public static ArrayList<String> validOptions = new ArrayList<>();
 

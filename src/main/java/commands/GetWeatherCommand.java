@@ -31,6 +31,7 @@ public class GetWeatherCommand extends Command {
         try {
             Response response = httpClient.newCall(request).execute();
             WeatherDataParser weatherDataParser = new WeatherDataParser(response);
+
             commandEvent.reply(String.format(
                     "Current weather is `%s`%n" +
                             "Temperature outside is `%s`%n" +
