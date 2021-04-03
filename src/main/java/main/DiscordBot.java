@@ -13,18 +13,17 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import objects.calls.BotCallHandler;
-import objects.calls.BotCallObject;
-import objects.lists.BotList;
 import objects.lists.BotListHandler;
-import objects.lists.BotListObject;
 import objects.options.BotOption;
+import objects.options.OptionHandler;
 import util.Config;
 import util.DiscordToken;
-import objects.options.OptionHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+
 
 /**
  * @author Alex Porter
@@ -43,6 +42,7 @@ public class DiscordBot {
     public static final String OPTION_HANDLER_JSON = "options.json";
     public static final String LIST_HANDLER_JSON = "lists.json";
 
+    public static ArrayList<String> validOptions = new ArrayList<>();
 
     public static void main(String[] args) {
         //Attempt to build the JDA Object, if it fails throw an exception
@@ -109,7 +109,10 @@ public class DiscordBot {
             optionHandler.deserializeOptions();
             optionHandler.init();
         }
+        if(optionHandler.getOptions().size() == 0)
+            createDefaultOptions();
         optionHandler.serializeOptions();
+        addValidOptions();
     }
 
     /**
@@ -132,6 +135,23 @@ public class DiscordBot {
             botCallHandler.init();
         }
         botCallHandler.serializeData();
+    }
+
+    /**
+     * Adds valid options
+     */
+    private static void addValidOptions() {
+        optionHandler
+                .getOptions()
+                .forEach(
+                        s -> {validOptions.add(s.getName());
+                        });
+    }
+
+    private static void createDefaultOptions() {
+        optionHandler.addOption(new BotOption("test_option_1", "a test option", "some_value"));
+        optionHandler.addOption(new BotOption("test_option_2", "a test option", "some_other_value"));
+        optionHandler.addOption(new BotOption("test_option_3", "a test option", "true"));
     }
 
 }
