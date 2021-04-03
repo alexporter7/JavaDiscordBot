@@ -38,16 +38,17 @@ public class LogCallCommand extends Command {
 
     private void logCall(CommandEvent commandEvent, String[] args) {
         StringBuilder description = new StringBuilder();
-        System.out.println(Arrays.toString(args));
         for(int i = 2; i < args.length; i++) {
             description.append(args[i]);
+            if(i + 1 != args.length)
+                description.append(" ");
         }
         try {
             boolean transferred = Boolean.parseBoolean(args[1]);
             DiscordBot.botCallHandler.addCall(
                     new BotCallObject(description.toString(), transferred));
-            DiscordBot.botListHandler.serializeList();
-            DiscordBot.botListHandler.deserializeList();
+            DiscordBot.botCallHandler.serializeData();
+            DiscordBot.botCallHandler.deserializeData();
             commandEvent.reply("Call has been logged.");
         } catch (Exception e) {
             commandEvent.reply("Transferred field was not a true/false value");
