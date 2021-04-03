@@ -2,7 +2,7 @@ package objects.lists;
 
 import com.google.gson.annotations.SerializedName;
 
-public class BotListObject {
+public class BotListItem {
 
     @SerializedName("itemName")
     private String itemName;
@@ -10,11 +10,11 @@ public class BotListObject {
     @SerializedName("description")
     private String description;
 
-    public BotListObject(String itemName) {
+    public BotListItem(String itemName) {
         this.itemName = itemName;
     }
 
-    public BotListObject(String itemName, String description) {
+    public BotListItem(String itemName, String description) {
         this.itemName = itemName;
         this.description = description;
     }

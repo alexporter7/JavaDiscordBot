@@ -10,21 +10,25 @@ public class BotList {
     private String listName;
 
     @SerializedName("items")
-    private ArrayList<BotListObject> items;
+    private ArrayList<BotListItem> items;
 
     public BotList() {
         this.listName = "no_name";
-        this.items = new ArrayList<BotListObject>();
+        this.items = new ArrayList<BotListItem>();
     }
 
     public BotList(String listName) {
         this.listName = listName;
-        this.items = new ArrayList<BotListObject>();
+        this.items = new ArrayList<BotListItem>();
     }
 
-    public BotList(String listName, ArrayList<BotListObject> items) {
+    public BotList(String listName, ArrayList<BotListItem> items) {
         this.listName = listName;
         this.items = items;
+    }
+
+    public void addItem(BotListItem item) {
+        this.items.add(item);
     }
 
     public String getListName() {
@@ -35,11 +39,11 @@ public class BotList {
         this.listName = listName;
     }
 
-    public ArrayList<BotListObject> getItems() {
+    public ArrayList<BotListItem> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<BotListObject> items) {
+    public void setItems(ArrayList<BotListItem> items) {
         this.items = items;
     }
 }
