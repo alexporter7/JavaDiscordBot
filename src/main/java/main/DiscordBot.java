@@ -13,17 +13,16 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import objects.calls.BotCallHandler;
+import objects.events.ScheduledEventHandler;
+import objects.events.ScheduledEvents;
 import objects.lists.BotListHandler;
 import objects.options.BotOption;
 import objects.options.OptionHandler;
-import util.BotObjectHandler;
 import util.Config;
 import util.DiscordToken;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 
 /**
@@ -39,6 +38,7 @@ public class DiscordBot {
     public static OptionHandler optionHandler = new OptionHandler();
     public static BotListHandler botListHandler = new BotListHandler();
     public static BotCallHandler botCallHandler = new BotCallHandler();
+    public static ScheduledEventHandler scheduledEventHandler = new ScheduledEventHandler();
 
     public static final String OPTION_HANDLER_JSON = "options.json";
     public static final String LIST_HANDLER_JSON = "lists.json";
@@ -54,6 +54,7 @@ public class DiscordBot {
             initializeOptions();
             initializeLists();
             initializeCallHandler();
+            initializeScheduledEventHandler();
         } catch (DiscordTokenFail discordTokenFail) {
             discordTokenFail.printStackTrace();
         }
@@ -155,6 +156,13 @@ public class DiscordBot {
         optionHandler.addOption(new BotOption("test_option_1", "a test option", "some_value"));
         optionHandler.addOption(new BotOption("test_option_2", "a test option", "some_other_value"));
         optionHandler.addOption(new BotOption("test_option_3", "a test option", "true"));
+    }
+
+    private static void initializeScheduledEventHandler() {
+        ScheduledEvents.initializeEvents();
+        if(!scheduledEventHandler.hasInit()) {
+            scheduledEventHandler.initialize();
+        }
     }
 
 }
