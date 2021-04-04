@@ -2,6 +2,7 @@ package objects.events;
 
 
 import main.DiscordBot;
+import objects.weather.WeatherObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,12 +10,14 @@ public class ScheduledEvents {
 
     public static void initializeEvents() {
 
-        //Example
+        //Weather Event
         DiscordBot.scheduledEventHandler.registerRepeatingEvent(
                 new ScheduledEvent(
                         () -> {
-                            DiscordBot.jda.getTextChannelsByName("general", true).get(0).sendMessage("Guess it works! (1)").queue(); },
-                        5, 5, TimeUnit.SECONDS)
+                            WeatherObject weatherObject = new WeatherObject();
+                            DiscordBot.jda.getTextChannelsByName("weather", true).get(0)
+                                    .sendMessage(weatherObject.pollWeather()).queue();},
+                        0, 2, TimeUnit.HOURS)
         );
 
     }
