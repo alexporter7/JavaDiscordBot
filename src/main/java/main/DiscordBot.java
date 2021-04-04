@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import objects.DiscordLogger;
 import objects.calls.BotCallHandler;
 import objects.events.ScheduledEventHandler;
 import objects.events.ScheduledEvents;
@@ -45,6 +46,7 @@ public class DiscordBot {
     public static BotListHandler botListHandler = new BotListHandler();
     public static BotCallHandler botCallHandler = new BotCallHandler();
     public static ScheduledEventHandler scheduledEventHandler = new ScheduledEventHandler();
+    public static DiscordLogger discordLogger = new DiscordLogger();
 
     public static final String OPTION_HANDLER_JSON = "options.json";
     public static final String LIST_HANDLER_JSON = "lists.json";
@@ -160,6 +162,8 @@ public class DiscordBot {
 
     private static void createDefaultOptions() {
         optionHandler.addOption(new BotOption("useScheduledEvents", "Tells the bot to initialize scheduled events", "true"));
+        optionHandler.addOption(new BotOption("enableLogging", "Enables logging to be done and sent through a specified channel", "true"));
+        optionHandler.addOption(new BotOption("loggingChannel", "The defined logging channel to send log messages", "log"));
     }
 
     private static void initializeScheduledEventHandler() {
