@@ -37,6 +37,14 @@ public class OptionHandler {
         this.options.add(botOption);
     }
 
+    public BotOption getOption(String optionName) {
+        for(BotOption option : this.options) {
+            if(option.getName().equals(optionName))
+                return option;
+        }
+        return null;
+    }
+
     public void serializeOptions() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {

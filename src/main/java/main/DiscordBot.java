@@ -153,14 +153,13 @@ public class DiscordBot {
     }
 
     private static void createDefaultOptions() {
-        optionHandler.addOption(new BotOption("test_option_1", "a test option", "some_value"));
-        optionHandler.addOption(new BotOption("test_option_2", "a test option", "some_other_value"));
-        optionHandler.addOption(new BotOption("test_option_3", "a test option", "true"));
+        optionHandler.addOption(new BotOption("useScheduledEvents", "Tells the bot to initialize scheduled events", "true"));
     }
 
     private static void initializeScheduledEventHandler() {
         ScheduledEvents.initializeEvents();
-        if(!scheduledEventHandler.hasInit()) {
+        if(!scheduledEventHandler.hasInit()
+                && optionHandler.getOption("useScheduledEvents").getValue().equals("true")) {
             scheduledEventHandler.initialize();
         }
     }

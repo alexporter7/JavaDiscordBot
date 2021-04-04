@@ -54,13 +54,19 @@ public class OptionCommand extends Command {
     }
 
     private void editOption(CommandEvent commandEvent, String[] args) {
+        if(args.length < 3) {
+            commandEvent.reply("Invalid arguments" +
+                    "$option edit <option_name> <new_value>");
+            return;
+        }
         if(!isValidOption(args[1])) {
             commandEvent.reply(String.format("[%s] is not a valid option", args[1]));
             return;
         }
-        if(args.length != 2) {
+        if(args.length != 3) {
             commandEvent.reply("Invalid length" +
                     "$option edit <option_name> <new_value>");
+            return;
         }
         for(BotOption option : DiscordBot.optionHandler.getOptions()) {
             if(option.getName().equals(args[1])) {
