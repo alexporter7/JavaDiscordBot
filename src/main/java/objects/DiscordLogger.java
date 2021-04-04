@@ -17,6 +17,7 @@ public class DiscordLogger {
                         DiscordBot.optionHandler.getOption("loggingChannel").getValue(), true)
                         .get(0);
         this.enabled = DiscordBot.optionHandler.getOption("enableLogging").getValue().equals("true");
+        this.logMessage("Discord Logger has been initialized");
     }
 
     public void logMessage(String message) {

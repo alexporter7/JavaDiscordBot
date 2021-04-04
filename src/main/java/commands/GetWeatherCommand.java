@@ -1,5 +1,6 @@
 package commands;
 
+import main.DiscordBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import objects.weather.WeatherObject;

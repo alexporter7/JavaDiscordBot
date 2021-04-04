@@ -1,6 +1,7 @@
 package objects.events;
 
 import main.DiscordBot;
+import objects.DiscordLogger;
 import util.Config;
 
 import java.util.ArrayList;
@@ -28,11 +29,18 @@ public class ScheduledEventHandler {
         for(ScheduledEvent event : this.repeatingEvents) {
             scheduledExecutorService.scheduleAtFixedRate(event.getCommand(), event.getInitialDelay(), event.getDelay(), event.getTimeUnit());
         }
+        for(ScheduledEvent event : this.oneTimeEvents) {
+            scheduledExecutorService.schedule(event.getCommand(), event.getInitialDelay(), event.getTimeUnit());
+        }
         this.init = true;
     }
 
     public void registerRepeatingEvent(ScheduledEvent scheduledEvent) {
-        repeatingEvents.add(scheduledEvent);
+        this.repeatingEvents.add(scheduledEvent);
+    }
+
+    public void registerOneTimeEvent(ScheduledEvent scheduledEvent) {
+        this.oneTimeEvents.add(scheduledEvent);
     }
 
 }

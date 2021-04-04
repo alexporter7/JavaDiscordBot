@@ -46,7 +46,7 @@ public class DiscordBot {
     public static BotListHandler botListHandler = new BotListHandler();
     public static BotCallHandler botCallHandler = new BotCallHandler();
     public static ScheduledEventHandler scheduledEventHandler = new ScheduledEventHandler();
-    public static DiscordLogger discordLogger = new DiscordLogger();
+    public static DiscordLogger discordLogger;
 
     public static final String OPTION_HANDLER_JSON = "options.json";
     public static final String LIST_HANDLER_JSON = "lists.json";
