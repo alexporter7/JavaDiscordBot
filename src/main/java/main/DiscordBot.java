@@ -33,6 +33,12 @@ import java.util.ArrayList;
  */
 public class DiscordBot {
 
+    /*
+     * Stuff I want to Add
+     * CatFacts API as a Scheduled Event
+     * https://cat-fact.herokuapp.com/facts
+     */
+
     public static JDA jda = null;
 
     public static OptionHandler optionHandler = new OptionHandler();
