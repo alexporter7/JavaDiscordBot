@@ -3,10 +3,7 @@ package main;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.examples.command.AboutCommand;
-import commands.GetWeatherCommand;
-import commands.ListCommand;
-import commands.LogCallCommand;
-import commands.OptionCommand;
+import commands.*;
 import exception.DiscordTokenFail;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -91,7 +88,9 @@ public class DiscordBot {
                 //List Command
                 new ListCommand(eventWaiter),
                 //Call Command
-                new LogCallCommand(eventWaiter)
+                new LogCallCommand(eventWaiter),
+                //Scheduled Events Command
+                new ScheduledTaskCommand(eventWaiter)
         );
 
         try {

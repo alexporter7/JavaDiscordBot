@@ -5,16 +5,28 @@ import java.util.concurrent.TimeUnit;
 
 public class ScheduledEvent {
 
+    private final String name;
+    private final String description;
     private final Runnable command;
     private long initialDelay;
     private long delay;
     private TimeUnit timeUnit;
 
-    public ScheduledEvent(Runnable command, long initalDelay, long delay, TimeUnit timeUnit) {
+    public ScheduledEvent(String name, String description, Runnable command, long initalDelay, long delay, TimeUnit timeUnit) {
+        this.name = name;
+        this.description = description;
         this.command = command;
         this.initialDelay = initalDelay;
         this.delay = delay;
         this.timeUnit = timeUnit;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Runnable getCommand() {

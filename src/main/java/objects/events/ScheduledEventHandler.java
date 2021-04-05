@@ -13,10 +13,13 @@ public class ScheduledEventHandler {
 
     private boolean init;
 
+    private final ScheduledExecutorService scheduledExecutorService;
+
     private ArrayList<ScheduledEvent> oneTimeEvents = new ArrayList<>();
     private ArrayList<ScheduledEvent> repeatingEvents = new ArrayList<>();
 
     public ScheduledEventHandler() {
+        this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
         this.init = false;
     }
 
@@ -25,14 +28,22 @@ public class ScheduledEventHandler {
     }
 
     public void initialize() {
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         for(ScheduledEvent event : this.repeatingEvents) {
-            scheduledExecutorService.scheduleAtFixedRate(event.getCommand(), event.getInitialDelay(), event.getDelay(), event.getTimeUnit());
+            this.scheduledExecutorService.scheduleAtFixedRate(event.getCommand(), event.getInitialDelay(), event.getDelay(), event.getTimeUnit());
         }
         for(ScheduledEvent event : this.oneTimeEvents) {
-            scheduledExecutorService.schedule(event.getCommand(), event.getInitialDelay(), event.getTimeUnit());
+            this.scheduledExecutorService.schedule(event.getCommand(), event.getInitialDelay(), event.getTimeUnit());
         }
         this.init = true;
+    }
+
+    public ArrayList<ScheduledEvent> getRepeatingEvents() {
+        return this.repeatingEvents;
+    }
+
+    public void disableScheduledEvents() {
+        this.scheduledExecutorService.shutdown();
+        this.init = false;
     }
 
     public void registerRepeatingEvent(ScheduledEvent scheduledEvent) {

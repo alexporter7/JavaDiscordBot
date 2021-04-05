@@ -15,6 +15,8 @@ public class ScheduledEvents {
         //Weather Event
         DiscordBot.scheduledEventHandler.registerRepeatingEvent(
                 new ScheduledEvent(
+                        "Weather Command",
+                        "Gives the current weather at UCF",
                         () -> {
                             WeatherObject weatherObject = new WeatherObject();
                             DiscordBot.jda.getTextChannelsByName("weather", true).get(0)
@@ -26,6 +28,8 @@ public class ScheduledEvents {
         //======= Register Repeating Events =======
         DiscordBot.scheduledEventHandler.registerOneTimeEvent(
                 new ScheduledEvent(
+                        "Discord Logger Delayed Execution",
+                        "Allows the JDA to build and initialize before initializing the logger",
                         () -> {
                             DiscordBot.discordLogger = new DiscordLogger();
                         }, 5, 5, TimeUnit.SECONDS
